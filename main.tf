@@ -30,22 +30,11 @@ output "appsecall" {
 }
 
 */
-
 data "akamai_appsec_contracts_groups" "my_contracts_groups" {
-  contractid = "ctr_1-1NC95D"
+  contractid = "1-1NC95D"
   groupid = "94456"
 }
 
-output "contractmy" {
-  value = data.akamai_appsec_contracts_groups.my_contracts_groups.output_text
-}
-
- resource "akamai_property" "new-property" {
-   name        = "soshetty-new-property"
-   product_id  = "prd_Fresca"
-   contract_id = "ctr_1-1NC95D"
-   group_id    = "grp_94456"
- }
 
 
 

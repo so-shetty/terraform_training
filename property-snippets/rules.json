@@ -1,0 +1,57 @@
+{
+    "rules": {
+  "name": "default",
+  "options": {
+      "is_secure": false
+  },
+  "behaviors": [
+    {
+      "name": "origin",
+      "options": {
+        "originType": "CUSTOMER", 
+        "hostname": "origin-terraform.soshetty.com", 
+        "forwardHostHeader": "REQUEST_HOST_HEADER", 
+        "cacheKeyHostname": "ORIGIN_HOSTNAME", 
+        "compress": true, 
+        "enable_true_client_ip": false,
+        "httpPort": 80 
+      }
+    },
+    {
+      "name": "cpCode", 
+      "options": {
+        "value": {
+            "id": 1907652, 
+            "name": "main site"
+        }
+      }
+    }
+  ],
+  "children": [
+    {
+      "name": "Compress Text Content",
+      "behaviors": [
+        {
+          "name": "gzipResponse",
+          "options": { "behavior": "ALWAYS" }
+        }
+      ],
+      "criteria": [
+        {
+          "name": "contentType",
+          "options": {
+            "matchOperator": "IS_ONE_OF",
+            "matchWildcard": true,
+            "matchCaseSensitive": false,
+            "values": [
+              "text/html*",
+              "text/css*",
+              "application/x-javascript*"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+}
