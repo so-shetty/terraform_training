@@ -1,26 +1,58 @@
-data "akamai_group" "test_group" {
-     group_name = "Akamai Technologies - Assets-1-3CV382"
-     contract_id = "ctr_1-3CV382"
+data "akamai_contracts" "all" {}
+data "akamai_groups" "all" {}
+
+/*output "contracts" {
+  value = data.akamai_contracts.all.contracts
 }
 
-output "test_group" {
-  value = data.akamai_group.test_group
+output "groups" {
+  value = data.akamai_groups.all.groups
 }
 
-data "akamai_appsec_configuration" "my_appsec_config" {
-     name = "Akamai Uni"
+
+
+/*data "akamai_group" "all" {
+  contract_id = "ctr_1-1NC95D"
+  group_name = "Soshetty"
      
-
-}
-output "my_appsec_config" {
-     value=data.akamai_appsec_configuration.my_appsec_config
 }
 
-data "akamai_property" "test_property" {
-  name    = "testingapisoshetty"
-  version = "1"
+output "all_group" {
+  value = data.akamai_group.all
 }
 
-output "test_property" {
-  value = data.akamai_property.test_property
+data "akamai_appsec_configuration" "myappsecall" {
+  name = "Soshetty WAF"
 }
+
+output "appsecall" {
+  value = data.akamai_appsec_configuration.myappsecall
+}
+
+*/
+
+data "akamai_appsec_contracts_groups" "my_contracts_groups" {
+  contractid = "ctr_1-1NC95D"
+  groupid = "94456"
+}
+
+output "contractmy" {
+  value = data.akamai_appsec_contracts_groups.my_contracts_groups.output_text
+}
+
+ resource "akamai_property" "new-property" {
+   name        = "soshetty-new-property"
+   product_id  = "prd_Fresca"
+   contract_id = "ctr_1-1NC95D"
+   group_id    = "grp_94456"
+ }
+
+
+
+/*data "akamai_products" "allp" {}
+output "products" {
+  value = data.akamai_products.allp.products
+}
+*/
+
+
